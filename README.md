@@ -1,3 +1,18 @@
+# The Fourier Scan Matching (FSM) implementation in C++
+
+FSM's code is located in a single header file for ease of use (`include/fsm.h`).
+This repository provides testing code for FSM and PLICP+GPM (`src/sm{_node}.cpp`.
+
+## Building
+
+As always
+```
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make
+```
+
 Run tests located in the `dataset` directory with
 
 

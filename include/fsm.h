@@ -5446,7 +5446,7 @@ class Match
       std::vector<double> rc1;
       std::vector<double> dts;
 
-      if (match_method.compare("FMT") == 0)
+      if (match_method.compare("FSM") == 0)
         dts = Rotation::fmt(real_scan, *result_pose, map,
           current_magnification_size, "batch", r2rp, c2rp,
           &rc0, &rc1, &intersections_time);
@@ -5509,7 +5509,7 @@ class Match
         std::chrono::high_resolution_clock::now();
 #endif
 
-      if (match_method.compare("FMT") == 0)
+      if (match_method.compare("FSM") == 0)
         cand_angles = Rotation::fmt(real_scan, *result_pose, map,
           current_magnification_size, "batch", r2rp, c2rp,
           &rc0, &rc1, &intersections_time);

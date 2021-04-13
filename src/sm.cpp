@@ -1197,7 +1197,7 @@ SM::testOne(
 #endif
 
   // Test per method
-  if (METHOD.compare("FMT") == 0 ||
+  if (METHOD.compare("FSM") == 0 ||
     METHOD.compare("DBH") == 0 ||
     METHOD.compare("KU") == 0)
   {

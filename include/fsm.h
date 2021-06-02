@@ -130,129 +130,150 @@ class X
     const unsigned int& num_rays)
   {
 #ifdef TIMES
-  std::chrono::high_resolution_clock::time_point a =
-    std::chrono::high_resolution_clock::now();
+    std::chrono::high_resolution_clock::time_point a =
+      std::chrono::high_resolution_clock::now();
 #endif
 
-  double px = std::get<0>(pose);
-  double py = std::get<1>(pose);
-  double pt = std::get<2>(pose);
+    double px = std::get<0>(pose);
+    double py = std::get<1>(pose);
+    double pt = std::get<2>(pose);
 
-  std::vector< std::pair<double,double> > intersections;
-  double mul = 100000000.0;
+    std::vector< std::pair<double,double> > intersections;
+    double mul = 100000000.0;
 
-  for (int i = 0; i < num_rays; i++)
-  {
-    double t_ray = i * 2*M_PI / num_rays + pt - M_PI;
-    t_ray = fmod(t_ray + 5*M_PI, 2*M_PI) - M_PI;
-
-    double x_far = px + mul*cos(t_ray);
-    double y_far = py + mul*sin(t_ray);
-
-
-    double tan_t_ray = tan(t_ray);
-    bool tan_peligro = false;
-    //if (fabs(fabs(t_ray) - M_PI/2) == 0.0)
-    if (fabs(fabs(t_ray) - M_PI/2) < 0.0001)
-      tan_peligro = true;
-
-
-    std::vector< std::pair<double,double> > candidate_points;
-
-    for (int l = 0; l < lines.size(); l++)
+    for (int i = 0; i < num_rays; i++)
     {
-      // The index of the first sensed point
-      int idx_1 = l;
+      double t_ray = i * 2*M_PI / num_rays + pt - M_PI;
+      t_ray = fmod(t_ray + 5*M_PI, 2*M_PI) - M_PI;
 
-      // The index of the second sensed point (in counter-clockwise order)
-      int idx_2 = idx_1 + 1;
+      double x_far = px + mul*cos(t_ray);
+      double y_far = py + mul*sin(t_ray);
 
-      if (idx_2 >= lines.size())
-        idx_2 = fmod(idx_2, lines.size());
 
-      if (idx_1 >= lines.size())
-        idx_1 = fmod(idx_1, lines.size());
+      double tan_t_ray = tan(t_ray);
+      bool tan_peligro = false;
+      //if (fabs(fabs(t_ray) - M_PI/2) == 0.0)
+      if (fabs(fabs(t_ray) - M_PI/2) < 0.0001)
+        tan_peligro = true;
 
-      double det_1 =
-        (lines[idx_1].first-px)*(lines[idx_2].second-py)-
-        (lines[idx_2].first-px)*(lines[idx_1].second-py);
 
-      double det_2 =
-        (lines[idx_1].first-x_far)*(lines[idx_2].second-y_far)-
-        (lines[idx_2].first-x_far)*(lines[idx_1].second-y_far);
+      std::vector< std::pair<double,double> > candidate_points;
 
-      if (det_1 * det_2 <= 0.0)
+      for (int l = 0; l < lines.size(); l++)
       {
-        double det_3 =
-          (px-lines[idx_1].first)*(y_far-lines[idx_1].second)-
-          (x_far-lines[idx_1].first)*(py-lines[idx_1].second);
+        // The index of the first sensed point
+        int idx_1 = l;
 
-        double det_4 =
-          (px-lines[idx_2].first)*(y_far-lines[idx_2].second)-
-          (x_far-lines[idx_2].first)*(py-lines[idx_2].second);
+        // The index of the second sensed point (in counter-clockwise order)
+        int idx_2 = idx_1 + 1;
 
-        if (det_3 * det_4 <= 0.0)
+
+        if (idx_2 >= lines.size())
+          idx_2 = fmod(idx_2, lines.size());
+
+        if (idx_1 >= lines.size())
+          idx_1 = fmod(idx_1, lines.size());
+
+        double det_1 =
+          (lines[idx_1].first-px)*(lines[idx_2].second-py)-
+          (lines[idx_2].first-px)*(lines[idx_1].second-py);
+
+        double det_2 =
+          (lines[idx_1].first-x_far)*(lines[idx_2].second-y_far)-
+          (lines[idx_2].first-x_far)*(lines[idx_1].second-y_far);
+
+
+        if (det_1 * det_2 <= 0.0)
         {
-          // They intersect!
+          double det_3 =
+            (px-lines[idx_1].first)*(y_far-lines[idx_1].second)-
+            (x_far-lines[idx_1].first)*(py-lines[idx_1].second);
 
-          double tan_two_points =
-            (lines[idx_2].second - lines[idx_1].second) /
-            (lines[idx_2].first - lines[idx_1].first);
+          double det_4 =
+            (px-lines[idx_2].first)*(y_far-lines[idx_2].second)-
+            (x_far-lines[idx_2].first)*(py-lines[idx_2].second);
 
-          double x = 0.0;
-          double y = 0.0;
-
-          if (!tan_peligro)
+          if (det_3 * det_4 <= 0.0)
           {
-            x = (py - lines[idx_1].second + tan_two_points * lines[idx_1].first
-              -tan_t_ray * px) / (tan_two_points - tan_t_ray);
+            // They intersect!
 
-            y = py + tan_t_ray * (x - px);
-          }
-          else
-          {
-            x = px;
-            y = lines[idx_1].second + tan_two_points * (x - lines[idx_1].first);
-            //y = (lines[idx_2].second + lines[idx_1].second)/2;
-          }
+            double x = 0.0;
+            double y = 0.0;
 
-          candidate_points.push_back(std::make_pair(x,y));
+            double ttp_x = lines[idx_2].first - lines[idx_1].first;
+            double ttp_y = lines[idx_2].second - lines[idx_1].second;
+
+            // The line segment is perpendicular to the x-axis
+            if (ttp_x == 0.0)
+            {
+              // The ray is parallel to the x-axis
+              if (x_far == px)
+              {
+                x = lines[idx_1].first;
+                y = py;
+              }
+              else
+              {
+                x = lines[idx_1].first;
+                y = y_far + (y_far - py)/(x_far - px) * (x - x_far);
+              }
+            }
+            else
+            {
+              double tan_two_points = ttp_y / ttp_x;
+
+              if (!tan_peligro)
+              {
+                x = (py - lines[idx_1].second + tan_two_points * lines[idx_1].first
+                  -tan_t_ray * px) / (tan_two_points - tan_t_ray);
+
+                y = py + tan_t_ray * (x - px);
+              }
+              else
+              {
+                x = px;
+                y = lines[idx_1].second + tan_two_points * (x - lines[idx_1].first);
+                //y = (lines[idx_2].second + lines[idx_1].second)/2;
+              }
+            }
+
+            candidate_points.push_back(std::make_pair(x,y));
+          }
         }
       }
-    }
 
-    double min_r = 100000000.0;
-    int idx = -1;
-    for (int c = 0; c < candidate_points.size(); c++)
-    {
-      double dx = candidate_points[c].first - px;
-      double dy = candidate_points[c].second - py;
-      double r = dx*dx+dy*dy;
-
-      if (r < min_r)
+      double min_r = 100000000.0;
+      int idx = -1;
+      for (int c = 0; c < candidate_points.size(); c++)
       {
-        min_r = r;
-        idx = c;
+        double dx = candidate_points[c].first - px;
+        double dy = candidate_points[c].second - py;
+        double r = dx*dx+dy*dy;
+
+        if (r < min_r)
+        {
+          min_r = r;
+          idx = c;
+        }
       }
+
+      assert(idx >= 0);
+
+      intersections.push_back(
+        std::make_pair(candidate_points[idx].first, candidate_points[idx].second));
     }
-
-    assert(idx >= 0);
-
-    intersections.push_back(
-      std::make_pair(candidate_points[idx].first, candidate_points[idx].second));
-  }
 
 #ifdef TIMES
-  std::chrono::high_resolution_clock::time_point b =
-    std::chrono::high_resolution_clock::now();
+    std::chrono::high_resolution_clock::time_point b =
+      std::chrono::high_resolution_clock::now();
 
-  std::chrono::duration<double> elapsed =
-    std::chrono::duration_cast< std::chrono::duration<double> >(b-a);
+    std::chrono::duration<double> elapsed =
+      std::chrono::duration_cast< std::chrono::duration<double> >(b-a);
 
-  printf("%f [X::findExact]\n", elapsed.count());
+    printf("%f [X::findExact]\n", elapsed.count());
 #endif
 
-  return intersections;
+    return intersections;
   }
 
 
@@ -388,27 +409,45 @@ class X
         {
           // They intersect!
 
-          double tan_two_points =
-            (lines[idx_2].second - lines[idx_1].second) /
-            (lines[idx_2].first - lines[idx_1].first);
-
           double x = 0.0;
           double y = 0.0;
 
-          if (!tan_peligro)
-          {
-            x = (py - lines[idx_1].second + tan_two_points * lines[idx_1].first
-              -tan_t_ray * px) / (tan_two_points - tan_t_ray);
+          double ttp_x = lines[idx_2].first - lines[idx_1].first;
+          double ttp_y = lines[idx_2].second - lines[idx_1].second;
 
-            y = py + tan_t_ray * (x - px);
+          // The line segment is perpendicular to the x-axis
+          if (ttp_x == 0.0)
+          {
+            // The ray is parallel to the x-axis
+            if (x_far == px)
+            {
+              x = lines[idx_1].first;
+              y = py;
+            }
+            else
+            {
+              x = lines[idx_1].first;
+              y = y_far + (y_far - py)/(x_far - px) * (x - x_far);
+            }
           }
           else
           {
-            x = px;
-            y = lines[idx_1].second + tan_two_points * (x - lines[idx_1].first);
-            //y = (lines[idx_2].second + lines[idx_1].second)/2;
-          }
+            double tan_two_points = ttp_y / ttp_x;
 
+            if (!tan_peligro)
+            {
+              x = (py - lines[idx_1].second + tan_two_points * lines[idx_1].first
+                -tan_t_ray * px) / (tan_two_points - tan_t_ray);
+
+              y = py + tan_t_ray * (x - px);
+            }
+            else
+            {
+              x = px;
+              y = lines[idx_1].second + tan_two_points * (x - lines[idx_1].first);
+              //y = (lines[idx_2].second + lines[idx_1].second)/2;
+            }
+          }
 
           candidate_points.push_back(std::make_pair(x,y));
           candidate_start_segment_ids.push_back(idx_1);

@@ -691,6 +691,18 @@ SM::initParams(const unsigned int& max_iterations,
   ENFORCE_TERMINAL_CONSTRAINT = enforce_terminal_constraint;
   ENFORCE_EARLY_GEARUP = enforce_early_gearup;
 
+  input_params_.num_iterations = max_iterations;
+  input_params_.xy_bound = xy_uniform_displacement;
+  input_params_.t_bound = t_uniform_displacement;
+  input_params_.sigma_noise_real = SIGMA_NOISE_REAL;
+  input_params_.sigma_noise_map = SIGMA_NOISE_MAP;
+  input_params_.max_counter = max_counter;
+  input_params_.min_magnification_size = min_magnification_size;
+  input_params_.max_magnification_size = max_magnification_size;
+  input_params_.max_recoveries = max_recoveries;
+  input_params_.enforce_terminal_constraint = enforce_terminal_constraint;
+  input_params_.enforce_early_gearup = enforce_early_gearup;
+
   std::string cwd("\0",FILENAME_MAX+1);
   base_path_ = getcwd(&cwd[0],cwd.capacity());
 }

@@ -6,7 +6,7 @@ This repository provides testing code for FSM and PLICP+GPM (`src/sm{_node}.cpp`
 ## Dependencies
 `CGAL 4.7`
 `FFTW3`
-'boost/random'
+`boost/random`
 
 ## Building
 

@@ -22,7 +22,7 @@ Run tests located in the `dataset` directory with
 
 
 ```
-./sm_node A B C D E F G H I J K L M N O P Q R S
+./sm_node A B C D E F G H 0 0 K L M N O P Q R S
 ```
 
 e.g.
@@ -42,11 +42,9 @@ where
 - `F`: The maximum orientation displacement. Sample orientations are generated uniformly in [-F,+F]
 - `G`: The standard deviation of measurement noise corrupting (real) scans
 - `H`: The standard deviation of measurement noise corrupting virtual scans. Suitable in the scan--to--map-scan matching context; irrelevant in scan-matching
-- `I`: Proportion of randomly invalidated rays; in [0,1]
-- `J`: Proportion of sequentially invalidated rays; in [0,1]
 - `K`: The size of scans
 - `L`: The size of the map. Relevant for scan--to--map-scan-matching tests; irrelevant in scan-matching
-- `M`: Identifier of the method used. Only FSM in this repository
+- `M`: Identifier of the method used. Only FSM supported in this repository
 - `N`: The maximum number of iterations over one sampling degree
 - `O`: The minimum sampling degree
 - `P`: The maximum sampling degree. Larger values result in extra accuracy and extra execution time

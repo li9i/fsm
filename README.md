@@ -1,7 +1,7 @@
 # The Fourier Scan Matching (FSM) implementation in C++
 
+This repository provides the source code of FSM and testing code.
 FSM's code is located in a single header file for ease of use (`include/fsm.h`).
-This repository provides testing code for FSM and PLICP+GPM (`src/sm{_node}.cpp`.
 
 ## Dependencies
 `CGAL 4.7`

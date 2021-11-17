@@ -691,123 +691,6 @@ SM::initParams(const unsigned int& max_iterations,
   ENFORCE_TERMINAL_CONSTRAINT = enforce_terminal_constraint;
   ENFORCE_EARLY_GEARUP = enforce_early_gearup;
 
-  input_params_.num_iterations = max_iterations;
-  input_params_.xy_bound = xy_uniform_displacement;
-  input_params_.t_bound = t_uniform_displacement;
-  input_params_.sigma_noise_real = SIGMA_NOISE_REAL;
-  input_params_.sigma_noise_map = SIGMA_NOISE_MAP;
-  input_params_.max_counter = max_counter;
-  input_params_.min_magnification_size = min_magnification_size;
-  input_params_.max_magnification_size = max_magnification_size;
-  input_params_.max_recoveries = max_recoveries;
-  input_params_.enforce_terminal_constraint = enforce_terminal_constraint;
-  input_params_.enforce_early_gearup = enforce_early_gearup;
-
-
-  // **** CSM parameters - comments copied from algos.h (by Andrea Censi)
-
-  // Maximum angular displacement between scans
-  input_.max_angular_correction_deg = 90.0;
-
-  // Maximum translation between scans (m)
-  input_.max_linear_correction = 2.0;
-
-  // Maximum ICP cycle iterations
-  input_.max_iterations = 1000;
-
-  // A threshold for stopping (m)
-  input_.epsilon_xy = 0.0001;
-
-  // A threshold for stopping (rad)
-  input_.epsilon_theta = 0.0001;
-
-  // Maximum distance for a correspondence to be valid
-  input_.max_correspondence_dist = 200.0;
-
-  // Noise in the scan (m)
-  input_.sigma = 0.01;
-
-  // Use smart tricks for finding correspondences.
-  input_.use_corr_tricks = 0;
-
-  // Restart: Restart if error is over threshold
-  input_.restart = 0;
-
-  // Restart: Threshold for restarting
-  input_.restart_threshold_mean_error = 0.01;
-
-  // Restart: displacement for restarting. (m)
-  input_.restart_dt = 0.01;
-
-  // Restart: displacement for restarting. (rad)
-  input_.restart_dtheta = 0.026;
-
-  // Max distance for staying in the same clustering
-  input_.clustering_threshold = 0.05;
-
-  // Number of neighbour rays used to estimate the orientation
-  input_.orientation_neighbourhood = 3;
-
-  // If 0, it's vanilla ICP
-  input_.use_point_to_line_distance = 1;
-
-  // Discard correspondences based on the angles
-  input_.do_alpha_test = 0;
-
-  // Discard correspondences based on the angles - threshold angle, in degrees
-  input_.do_alpha_test_thresholdDeg = 20.0;
-
-  // Percentage of correspondences to consider: if 0.9,
-  // always discard the top 10% of correspondences with more error
-  input_.outliers_maxPerc = 0.95;
-
-  // Parameters describing a simple adaptive algorithm for discarding.
-  //  1) Order the errors.
-  //  2) Choose the percentile according to outliers_adaptive_order.
-  //     (if it is 0.7, get the 70% percentile)
-  //  3) Define an adaptive threshold multiplying outliers_adaptive_mult
-  //     with the value of the error at the chosen percentile.
-  //  4) Discard correspondences over the threshold.
-  //  This is useful to be conservative; yet remove the biggest errors.
-  input_.outliers_adaptive_order = 1.0;
-
-  input_.outliers_adaptive_mult = 2.0;
-
-  // If you already have a guess of the solution, you can compute the polar angle
-  // of the points of one scan in the new position. If the polar angle is not a monotone
-  // function of the readings index, it means that the surface is not visible in the
-  // next position. If it is not visible, then we don't use it for matching.
-  input_.do_visibility_test = 0;
-
-  // no two points in laser_sens can have the same corr.
-  input_.outliers_remove_doubles = 1;
-
-  // If 1, computes the covariance of ICP using the method http://purl.org/censi/2006/icpcov
-  input_.do_compute_covariance = 0;
-
-  // Checks that find_correspondences_tricks gives the right answer
-  input_.debug_verify_tricks = 0;
-
-  // If 1, the field 'true_alpha' (or 'alpha') in the first scan is used to compute the
-  // incidence beta, and the factor (1/cos^2(beta)) used to weight the correspondence.");
-  input_.use_ml_weights = 0;
-
-  // If 1, the field 'readings_sigma' in the second scan is used to weight the
-  // correspondence by 1/sigma^2
-  input_.use_sigma_weights = 0;
-
-  input_.laser[0] = 0.0;
-  input_.laser[1] = 0.0;
-  input_.laser[2] = 0.0;
-
-  input_.min_reading = 0.01;
-  input_.max_reading = 100;
-
-  // http://docs.ros.org/kinetic/api/csm/html/gpm_8c_source.html
-  input_.gpm_theta_bin_size_deg = 1; // 5
-  input_.gpm_extend_range_deg = 1;   // 15
-  input_.gpm_interval = 1;
-
   std::string cwd("\0",FILENAME_MAX+1);
   base_path_ = getcwd(&cwd[0],cwd.capacity());
 }
@@ -1197,17 +1080,11 @@ SM::testOne(
 #endif
 
   // Test per method
-  if (METHOD.compare("FSM") == 0 ||
-    METHOD.compare("DBH") == 0 ||
-    METHOD.compare("KU") == 0)
+  if (METHOD.compare("FSM") == 0)
   {
     FSMSM::Match::fmtdbh(real_scan_corrupted, virtual_pose, virtual_scan_points,
       METHOD, r2rp_, c2rp_, ip, op, result_pose);
   }
-
-  if (METHOD.compare("CSM") == 0)
-    CSM::Match::csm(real_scan_corrupted, virtual_scan_corrupted, virtual_pose,
-      &input_, &output_, ip, op, result_pose);
 
 #if defined (PRINTS)
   printf("______________________________________________________________\n");

@@ -3,6 +3,11 @@
 FSM's code is located in a single header file for ease of use (`include/fsm.h`).
 This repository provides testing code for FSM and PLICP+GPM (`src/sm{_node}.cpp`.
 
+## Dependencies
+`CGAL 4.7`
+`FFTW3`
+'boost/random'
+
 ## Building
 
 As always

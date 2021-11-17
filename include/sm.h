@@ -18,7 +18,6 @@
 #include <functional>
 
 #include "fsm.h"
-#include "csm.h"
 
 
 class SM
@@ -73,9 +72,6 @@ class SM
     bool ENFORCE_EARLY_GEARUP;
 
     FSMSM::input_params input_params_;
-
-    sm_params input_;
-    sm_result output_;
 
     std::string base_path_;
 

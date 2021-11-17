@@ -46,7 +46,7 @@ where
 - `J`: Proportion of sequentially invalidated rays; in [0,1]
 - `K`: The size of scans
 - `L`: The size of the map. Relevant for scan--to--map-scan-matching tests; irrelevant in scan-matching
-- `M`: Identifier of the method used. Legitimate values are FSM, DBH, KU, CSM (PLICP + GPM)
+- `M`: Identifier of the method used. Only FSM in this repository
 - `N`: The maximum number of iterations over one sampling degree
 - `O`: The minimum sampling degree
 - `P`: The maximum sampling degree. Larger values result in extra accuracy and extra execution time

@@ -1,6 +1,7 @@
 # The Fourier Scan Matching (FSM) implementation in C++
 
 This repository provides the source code of FSM and testing code.
+For the ROS package of FSM visit `https://github.com/li9i/fsm_lidom_ros`.
 FSM's code is located in a single header file for ease of use (`include/fsm.h`).
 
 ## Dependencies

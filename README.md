@@ -1,8 +1,11 @@
-# The Fourier Scan Matching (FSM) implementation in C++
+# FSM: Correspondenceless scan-matching of panoramic 2D range scans
+
+#### [[ IEEE IROS ](https://ieeexplore.ieee.org/abstract/document/9981228)] [[ Video ](https://www.youtube.com/watch?v=hB4qsHCEXGI)] [[ Presentation ](https://github.com/phd-li9i/fsm_presentation_iros22/blob/master/main.pdf)]
 
 This repository provides the source code of FSM and testing code.
-For the ROS package of FSM visit `https://github.com/li9i/fsm_lidom_ros`.
 FSM's code is located in a single header file for ease of use (`include/fsm.h`).
+
+For the ROS 1 package of FSM visit `https://github.com/li9i/fsm_lidom_ros`.
 
 ## Dependencies
 `CGAL 4.7`

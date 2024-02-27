@@ -1,6 +1,6 @@
 # FSM: Correspondenceless scan-matching of panoramic 2D range scans
 
-#### [[ IEEE IROS ](https://ieeexplore.ieee.org/abstract/document/9981228)] [[ Video ](https://www.youtube.com/watch?v=hB4qsHCEXGI)] [[ Presentation ](https://github.com/phd-li9i/fsm_presentation_iros22/blob/master/main.pdf)]
+#### [[ IEEE/RSJ IROS ](https://ieeexplore.ieee.org/abstract/document/9981228)] [[ Video ](https://www.youtube.com/watch?v=hB4qsHCEXGI)] [[ Presentation ](https://github.com/phd-li9i/fsm_presentation_iros22/blob/master/main.pdf)]
 
 This repository provides the source code of FSM and testing code.
 FSM's code is located in a single header file for ease of use (`include/fsm.h`).

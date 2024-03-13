@@ -7,7 +7,7 @@
 This repository provides the source code of FSM and testing code.
 FSM's code is located in a single header file for ease of use (`include/fsm.h`).
 
-For the ROS 1 package of FSM visit `https://github.com/li9i/fsm_lidom_ros`.
+For the ROS 1 package of FSM visit the [`fsm_lidom_ros` package github page](https://github.com/li9i/fsm_lidom_ros).
 
 ## Dependencies
 `CGAL 4.7`

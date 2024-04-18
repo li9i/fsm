@@ -17,23 +17,23 @@ For the ROS 1 package of FSM visit the [`fsm_lidom_ros` package github page](htt
 ## Building
 
 As always
-```
-$ mkdir build
-$ cd build
-$ cmake ..
-$ make
+```console
+mkdir build
+cd build
+cmake ..
+make
 ```
 
 Run tests located in the `dataset` directory with
 
 
-```
+```console
 ./sm_node A B C D E F G H 0 0 K L M N O P Q R S
 ```
 
 e.g.
 
-```
+```console
 ./sm_node 2 1 0 778 0.2 0.786 0.1 0.0 0.0 0.0 360 360 FSM 200 0 3 10 0 0
 ```
 

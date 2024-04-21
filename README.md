@@ -9,7 +9,7 @@ FSM's code is located in a single header file for ease of use (`include/fsm.h`).
 
 For the ROS 1 package of FSM visit the `fsm_lidom_ros` package [github page](https://github.com/li9i/fsm_lidom_ros).
 
-## Experimental results at a glance
+## Why use FSM for lidar odometry from 2d panoramic scans
 
 ![Experimental results at a glance](https://i.imgur.com/GvFlHgF.png)
 

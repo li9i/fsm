@@ -7,7 +7,12 @@
 This repository provides the source code of FSM and testing code.
 FSM's code is located in a single header file for ease of use (`include/fsm.h`).
 
-For the ROS 1 package of FSM visit the [`fsm_lidom_ros` package github page](https://github.com/li9i/fsm_lidom_ros).
+For the ROS 1 package of FSM visit the `fsm_lidom_ros` package [github page](https://github.com/li9i/fsm_lidom_ros).
+
+## Experimental results at a glance
+
+![Experimental results at a glance](https://i.imgur.com/GvFlHgF.png)
+
 
 ## Dependencies
 `CGAL 4.7`
@@ -57,3 +62,7 @@ where
 - `Q`: The maximum number of recoveries. Larger values result in extra accuracy and extra execution time
 - `R`: Enforcement of a terminal constraint; attempts a recovery if not fulfilled, if true. Set to false for scan-matching
 - `S`: Enforcement of an early gear-up feature, see code for details. Set to false for scan-matching; true for scan--to--map-scan matching
+
+## System at a glance
+
+![Experimental results at a glance](https://i.imgur.com/GvFlHgF.png)

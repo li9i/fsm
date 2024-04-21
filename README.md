@@ -65,4 +65,4 @@ where
 
 ## System at a glance
 
-![Experimental results at a glance](https://i.imgur.com/GvFlHgF.png)
+![System at a glance](https://i.imgur.com/PHIThGJ.png)

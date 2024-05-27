@@ -4,7 +4,7 @@
 [![youtube.com](https://img.shields.io/badge/1'_presentation-YouTube-FF0000)](https://www.youtube.com/watch?v=hB4qsHCEXGI)
 [![github.com](https://img.shields.io/badge/pdf_presentation-333333)](https://github.com/phd-li9i/fsm_presentation_iros22/blob/master/main.pdf)
 
-This repository provides the C++ single header source file of FSM (`include/fsm.h`) and testing code.
+This repository provides the C++ single-header source file of FSM (`include/fsm.h`), and testing code.
 
 For using FSM with ROS in order to produce lidar odometry visit [`fsm_lidom_ros`](https://github.com/li9i/fsm_lidom_ros).
 

@@ -6,7 +6,7 @@
 
 This repository provides the C++ single-header source file of FSM (`include/fsm.h`), and testing code.
 
-For using FSM with ROS in order to produce lidar odometry visit [`fsm_lidom_ros`](https://github.com/li9i/fsm_lidom_ros).
+For using FSM with ROS in order to produce lidar odometry visit [`fsm_lo`](https://github.com/li9i/fsm_lo).
 
 ## Why use FSM
 

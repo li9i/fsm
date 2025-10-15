@@ -2,7 +2,7 @@
 
 [![ieeexplore.ieee.org](https://img.shields.io/badge/IEEE/RSJ_IROS_2022_paper-00629B)](https://ieeexplore.ieee.org/abstract/document/9981228)
 [![youtube.com](https://img.shields.io/badge/1'_presentation-YouTube-FF0000)](https://www.youtube.com/watch?v=hB4qsHCEXGI)
-[![github.com](https://img.shields.io/badge/pdf_presentation-333333)](https://github.com/phd-li9i/fsm_presentation_iros22/blob/master/main.pdf)
+[![github.com](https://img.shields.io/badge/pdf_presentation-333333)](https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/phd-li9i/fsm_presentation_iros22/master/main.pdf)
 
 This repository provides the C++ single-header source file of FSM (`include/fsm.h`), and testing code.
 

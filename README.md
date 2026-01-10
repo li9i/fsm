@@ -12,8 +12,10 @@ For using FSM with ROS in order to produce lidar odometry visit [`fsm-lo`](https
 
 ![Experimental results at a glance](https://i.imgur.com/GvFlHgF.png)
 
+Image source: [IEEE](https://ieeexplore.ieee.org/abstract/document/9981228) (p.7)
 
 ## Dependencies
+
 `CGAL 4.7`
 `FFTW3`
 `boost/random`
@@ -21,6 +23,7 @@ For using FSM with ROS in order to produce lidar odometry visit [`fsm-lo`](https
 ## Building
 
 As always
+
 ```sh
 mkdir build
 cd build
@@ -29,7 +32,6 @@ make
 ```
 
 Run tests located in the `dataset` directory with
-
 
 ```sh
 ./sm_node A B C D E F G H 0 0 K L M N O P Q R S
@@ -44,6 +46,7 @@ e.g.
 where
 
 - `A`: The number of iterations for the translational component (the larger the
+
        location displacement between scans the higher this value needs to be)
 - `B`: How many times to iterate over all instances of `dataset`
 - `C`: The start sample id; typically 0
@@ -65,3 +68,27 @@ where
 ## System at a glance
 
 ![System at a glance](https://i.imgur.com/PHIThGJ.png)
+
+Image source: [IEEE](https://ieeexplore.ieee.org/abstract/document/9981228) (p.4)
+
+## Motivation and Under the hood
+
+### 1 min summary video
+
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/hB4qsHCEXGI/0.jpg)](http://www.youtube.com/watch?v=hB4qsHCEXGI "1 min summary video")
+
+<!-- ### IROS 2022 presentation slides -->
+
+<!-- [PDF link](https://raw.githubusercontent.com/li9i/fsm_presentation_iros22/master/main.pdf) -->
+
+### IROS 2022 paper
+
+```bibtex
+@INPROCEEDINGS{9981228,
+  author={Filotheou, Alexandros and Sergiadis, Georgios D. and Dimitriou, Antonis G.},
+  booktitle={2022 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  title={FSM: Correspondenceless scan-matching of panoramic 2D range scans},
+  year={2022},
+  pages={6968-6975},
+  doi={10.1109/IROS47612.2022.9981228}}
+```
